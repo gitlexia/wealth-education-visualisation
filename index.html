@@ -1,0 +1,84 @@
+<!--Author: Alexia Riner - 2026-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q2 Residual Plot</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="signature">
+    Alexia Riner - 2026
+</div>
+<div class="page">
+    <h1>Q2: Which countries consistently deviate from their expected education levels relative to their IWI and what do these countries have in common?</h1>
+
+    <div class="filter-bar">
+        <span class="filter-label">Region:</span>
+        <button class="filter-button active" data-region="all">All</button>
+        <button class="filter-button" data-region="Asia/Pacific">Asia/Pacific</button>
+        <button class="filter-button" data-region="Europe">Europe</button>
+        <button class="filter-button" data-region="Latin America">Latin America</button>
+        <button class="filter-button" data-region="Sub-Saharan Africa">Sub-Saharan Africa</button>
+        <button class="filter-button" data-region="North America">North America</button>
+        <button class="filter-button" data-region="Middle East/North Africa">Middle East/North Africa</button>
+    </div>
+
+    <div class="deviation-bar">
+        <span class="filter-label">Deviation:</span>
+        <button class="deviation-button " data-deviation="all">All deviations</button>
+        <button class="deviation-button active" data-deviation="strong">Strong deviations (|residual| ≥ 10)</button>
+    </div>
+
+    <div class="top-bar">
+        <button id="theme-button" class="control-button mode-button">☀ Light mode</button>
+    </div>
+
+    <div class="chart-container">
+
+        <div class="chart-title">
+            Residual Constellation Scatterplot
+        </div>
+
+        <div class="chart-hint">
+            Hover for details · Click to compare or select from the list (max 5)
+        </div>
+
+        <div class="scatter-controls">
+            <div id="selectContainer"></div>
+        </div>
+
+        <svg id="chart" width="900" height="550"></svg>
+        <div id="detail-card" class="detail-card"></div>
+    </div>
+
+    <div id="legend" class="legend"></div>
+
+</div>
+
+<div class="dna-section">
+    <div class="dna-header">
+        <span class="dna-title">Structural Factor "DNA" Comparison</span>
+        <span class="dna-hint">Hover columns to focus · Hover dots for values · Please select up to 5 countries for readability</span>
+        <button id="clear-comparison" class="control-button">Clear all</button>
+    </div>
+
+    <div id="dna-selected" class="dna-selected">
+        <span class="dna-selected-empty">No countries selected yet</span>
+    </div>
+
+    <div id="dna-wrap"></div>
+
+    <div id="dna-footer-note" class="dna-footer-note"></div>
+    <div id="dna-legend" class="dna-legend"></div>
+
+    <div id="dna-tooltip"></div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

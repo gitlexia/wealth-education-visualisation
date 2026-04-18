@@ -1,0 +1,493 @@
+/*Author: Alexia Riner - 2026*/
+
+/* small signature in bottom corner */
+.signature {
+    position: fixed;
+    bottom: 12px;
+    left: 16px;
+
+    font-size: 15px;
+    color: var(--muted);
+
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+
+    pointer-events: none;
+}
+
+/* theme colours (dark + light mode) */
+:root {
+    --bg: #060b18;
+    --panel: #0c1324;
+    --text: rgba(255,255,255,0.92);
+    --muted: rgba(255,255,255,0.65);
+    --border: rgba(255,255,255,0.10);
+    --axis: rgba(255,255,255,0.16);
+    --baseline: rgba(255,255,255,0.45);
+    --button-border: rgba(255,255,255,0.14);
+    --button-bg: transparent;
+    --button-text: rgba(255,255,255,0.72);
+    --button-hover: rgba(255,255,255,0.05);
+    --dot-opacity: 0.8;
+    --line-opacity: 0.35;
+    --inactive-opacity: 0.1;
+}
+
+body.light-mode {
+    --bg: #f7f7f5;
+    --panel: #ffffff;
+    --text: #111111;
+    --muted: #5f6368;
+    --axis: rgba(0,0,0,0.6);
+    --border: rgba(0,0,0,0.12);
+    --baseline: rgba(0,0,0,0.5);
+    --button-border: rgba(0,0,0,0.14);
+    --button-bg: #ffffff;
+    --button-text: rgba(0,0,0,0.7);
+    --button-hover: rgba(0,0,0,0.04);
+    --dot-opacity: 0.85;
+    --line-opacity: 0.5;
+    --inactive-opacity: 0.2;
+}
+
+/* base layout */
+body {
+    margin: 0;
+    padding: 24px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Noto Sans, sans-serif;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+/* controls and filters */
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.control-button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--button-border);
+    background: var(--button-bg);
+    color: var(--button-text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    background: var(--button-hover);
+    color: var(--text);
+}
+
+.mode-button {
+    border-width: 2px;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.filter-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.filter-button,
+.deviation-button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--button-border);
+    background: transparent;
+    color: var(--button-text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-button:hover,
+.deviation-button:hover {
+    background: var(--button-hover);
+    color: var(--text);
+}
+
+.filter-button.active,
+.deviation-button.active {
+    color: var(--text);
+    border-color: var(--text);
+}
+
+/* main scatterplot container */
+.chart-container {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 22px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+svg {
+    display: block;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.chart-hint {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* tooltip (scatterplot) */
+.detail-card {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    min-width: 250px;
+    max-width: 320px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(6, 11, 24, 0.96);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.92);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    pointer-events: none;
+    z-index: 10;
+}
+
+body.light-mode .detail-card {
+    background: rgba(248,247,244,0.98);
+    border: 1px solid rgba(0,0,0,0.10);
+    color: rgba(0,0,0,0.82);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.detail-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.detail-line {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-left: 28px;
+    color: var(--muted);
+}
+
+/* legend (scatterplot) */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-symbol {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-star {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.legend-line {
+    width: 28px;
+    height: 0;
+    border-top: 2px dashed var(--baseline);
+}
+
+.legend-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.legend-title {
+    color: var(--text);
+}
+
+.legend-sub {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* bottom panel DNA comparison */
+
+.dna-section {
+    position: relative;
+    max-width: 1000px;
+    margin: 22px auto 0 auto;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 22px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.dna-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.dna-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.dna-hint {
+    font-size: 14px;
+    color: var(--muted);
+    flex: 1;
+}
+
+.dna-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    text-align: center;
+    line-height: 1.7;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+#dna-chart {
+    display: block;
+}
+
+.dna-axis path,
+.dna-axis line {
+    stroke: var(--axis);
+}
+
+.dna-axis text {
+    fill: var(--muted);
+    font-size: 11px;
+}
+
+.dna-axis-label {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dna-axis-unit {
+    fill: var(--muted);
+    font-size: 10px;
+}
+
+.dna-avg-line {
+    stroke: var(--baseline);
+    stroke-width: 1.2;
+    stroke-dasharray: 4,3;
+    opacity: 0.7;
+}
+
+.dna-connector {
+    fill: none;
+    stroke-width: 2;
+}
+
+.dna-dot {
+    stroke-width: 1.5;
+}
+
+/* DNA tooltip based on hover template structure */
+#dna-tooltip .tooltip {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 180px;
+    max-width: 260px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(6, 11, 24, 0.96);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.92);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 20;
+    pointer-events: none;
+}
+
+body.light-mode #dna-tooltip .tooltip {
+    background: rgba(248,247,244,0.98);
+    border: 1px solid rgba(0,0,0,0.10);
+    color: rgba(0,0,0,0.82);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.dna-selected {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    min-height: 34px;
+}
+
+/* selected country "chips" */
+.dna-selected-empty {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.dna-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 2px solid;
+    background: transparent;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.dna-chip-name {
+    font-weight: 600;
+}
+
+.dna-chip-remove {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+}
+
+.dna-chip-remove:hover {
+    opacity: 1;
+}
+
+.dna-slots-left {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.dna-footer-note {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 1000px;
+}
+
+.dna-legend {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    min-height: 24px;
+}
+
+.dna-legend-empty {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.dna-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+}
+
+.dna-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dna-legend-dash {
+    width: 24px;
+    height: 0;
+    border-top: 2px dashed var(--baseline);
+    flex-shrink: 0;
+}
+
+.scatter-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+#selection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.labelSelect {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* dropdown selection */
+#countrySelect {
+    min-width: 220px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--button-border);
+    background: var(--panel);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+#countrySelect:hover,
+#countrySelect:focus {
+    border-color: var(--text);
+}
