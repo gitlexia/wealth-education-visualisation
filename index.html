@@ -10,14 +10,15 @@
 
 <body>
 
-<div class="signature">
+<footer class="signature">
     Alexia Riner - 2026
-</div>
-<div class="page">
+</footer>
+
+<main class="page">
     <h1>Q2: Which countries consistently deviate from their expected education levels relative to their IWI and what do these countries have in common?</h1>
 
     <div class="filter-bar">
-        <span class="filter-label">Region:</span>
+        <p class="filter-label">Region:</p>
         <button class="filter-button active" data-region="all">All</button>
         <button class="filter-button" data-region="Asia/Pacific">Asia/Pacific</button>
         <button class="filter-button" data-region="Europe">Europe</button>
@@ -27,9 +28,9 @@
         <button class="filter-button" data-region="Middle East/North Africa">Middle East/North Africa</button>
     </div>
 
-    <div class="deviation-bar">
-        <span class="filter-label">Deviation:</span>
-        <button class="deviation-button " data-deviation="all">All deviations</button>
+    <div class="filter-bar">
+        <p class="filter-label">Deviation:</p>
+        <button class="deviation-button" data-deviation="all">All deviations</button>
         <button class="deviation-button active" data-deviation="strong">Strong deviations (|residual| ≥ 10)</button>
     </div>
 
@@ -38,45 +39,46 @@
     </div>
 
     <div class="chart-container">
-
-        <div class="chart-title">
+        <h2 class="chart-title">
             Residual Constellation Scatterplot
-        </div>
+        </h2>
 
-        <div class="chart-hint">
+        <p class="chart-hint">
             Hover for details · Click to compare or select from the list (max 5)
-        </div>
+        </p>
 
         <div class="scatter-controls">
             <div id="selectContainer"></div>
         </div>
 
-        <svg id="chart" width="900" height="550"></svg>
-        <div id="detail-card" class="detail-card"></div>
+        <svg id="chart" width="900" height="550" role="img" aria-labelledby="scatter-svg-title">
+            <title id="scatter-svg-title">Residual constellation scatterplot of countries by wealth and residual education performance</title>
+        </svg>
+
+        <div id="detail-card" class="detail-card" aria-hidden="true"></div>
     </div>
 
-    <div id="legend" class="legend"></div>
+    <div id="legend" class="legend" role="group" aria-label="Scatterplot legend"></div>
+</main>
 
-</div>
-
-<div class="dna-section">
+<section class="dna-section" aria-labelledby="dna-title">
     <div class="dna-header">
-        <span class="dna-title">Structural Factor "DNA" Comparison</span>
-        <span class="dna-hint">Hover columns to focus · Hover dots for values · Please select up to 5 countries for readability</span>
+        <h2 id="dna-title" class="dna-title">Structural Factor "DNA" Comparison</h2>
+        <p class="dna-hint">Hover columns to focus · Hover dots for values · Please select up to 5 countries for readability</p>
         <button id="clear-comparison" class="control-button">Clear all</button>
     </div>
 
-    <div id="dna-selected" class="dna-selected">
+    <div id="dna-selected" class="dna-selected" role="group" aria-label="Selected countries">
         <span class="dna-selected-empty">No countries selected yet</span>
     </div>
 
-    <div id="dna-wrap"></div>
+    <div id="dna-wrap" aria-label="DNA comparison chart"></div>
 
     <div id="dna-footer-note" class="dna-footer-note"></div>
-    <div id="dna-legend" class="dna-legend"></div>
+    <div id="dna-legend" class="dna-legend" role="group" aria-label="DNA chart legend"></div>
 
-    <div id="dna-tooltip"></div>
-</div>
+    <div id="dna-tooltip" aria-hidden="true"></div>
+</section>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="script.js"></script>
