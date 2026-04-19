@@ -890,17 +890,21 @@ function buildScatter(data) {
     // reference code: https://stackoverflow.com/questions/32177431/d3js-map-selectable-country-list
     function renderCountrySelect() {
         d3.select("#selectContainer").html("");
+
         d3.select("#selectContainer")
             .append("div")
             .attr("id", "selection");
 
         d3.select("#selection")
-            .append("div")
+            .append("label")
+            .attr("for", "countrySelect")
             .attr("class", "labelSelect")
-            .html("Select a country:");
+            .text("Select a country:");
+
         const refSelect = d3.select("#selection")
             .append("select")
             .attr("id", "countrySelect")
+            .attr("aria-label", "Select a country")
             .on("change", changeCountry);
 
         //returns alphabetically sorted list of countries that pass the selected filters
