@@ -473,7 +473,7 @@ function buildScatter(data) {
     function getPerformanceLabel(d) {
         if (d.residual_scaled > 0) {
             if (d.yearsAbove >= 10) {
-                return `★ Consistent star - ${d.yearsAbove} yrs above`;
+                return `★ Consistent overachievers - ${d.yearsAbove} yrs above`;
             }
             return `${d.yearsAbove} yrs above expected`;
         }
@@ -958,7 +958,7 @@ function buildScatter(data) {
   <div class="legend-item">
     <div class="legend-star">★</div>
     <div class="legend-text">
-      <div class="legend-title">Consistent star</div>
+      <div class="legend-title">Consistent overachievers</div>
       <div class="legend-sub">≥10 years above expected line</div>
     </div>
   </div>
