@@ -83,7 +83,12 @@ function buildScatter(data) {
 
     // checks whether a country should be shown or faded based on current region and deviation filters
     function isVisible(d) {
+        const hasEnoughYears =
+            (d.residual_scaled > 0 && d.yearsAbove >= 5) ||
+            (d.residual_scaled < 0 && d.yearsBelow >= 5);
+
         return (
+            hasEnoughYears &&
             (activeRegion === "all" || d.region === activeRegion) &&
             (activeDeviation === "all" || Math.abs(d.residual_scaled) >= 10)
         );
