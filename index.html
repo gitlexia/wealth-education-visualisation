@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Q2 Residual Plot</title>
+    <title>Education Outcomes | Global Data Explorer</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<footer class="signature">
-    Alexia Riner - 2026
-</footer>
+
 
 <main class="page">
-    <h1>Q2: Which countries consistently deviate from their expected education levels relative to their IWI and what do these countries have in common?</h1>
+    <header class="dashboard-heading"><div class="eyebrow"><span class="status-dot"></span> GLOBAL EDUCATION EXPLORER <span class="edition">/ RESEARCH DASHBOARD</span></div><h1>Where does education outperform wealth?</h1><p class="page-intro">Explore how education outcomes compare with expectations based on national wealth, and investigate the patterns behind persistent differences.</p></header><div class="filters-heading">EXPLORE THE DATA <span>Filter the view</span></div>
 
     <div class="filter-bar">
         <p class="filter-label">Region:</p>
@@ -39,9 +37,7 @@
     </div>
 
     <div class="chart-container">
-        <h2 class="chart-title">
-            Residual Constellation Scatterplot
-        </h2>
+        <div class="chart-kicker">01 / PERFORMANCE OVERVIEW</div><h2 class="chart-title">Education performance vs. wealth</h2>
 
         <p class="chart-hint">
             Hover for details · Click to compare or select from the list (max 5)
@@ -60,8 +56,8 @@
 
 <section class="dna-section" aria-labelledby="dna-title">
     <div class="dna-header">
-        <h2 id="dna-title" class="dna-title">Structural Factor "DNA" Comparison</h2>
-        <p class="dna-hint">Hover columns to focus · Hover dots for values · Please select up to 5 countries for readability</p>
+        <div class="dna-title-stack"><div class="chart-kicker">02 / COUNTRY COMPARISON</div><h2 id="dna-title" class="dna-title">Compare education indicators</h2></div>
+        <p class="dna-hint">Select up to five countries to compare enrolment, completion and investment patterns.</p>
         <button id="clear-comparison" class="control-button">Clear all</button>
     </div>
 
@@ -75,6 +71,7 @@
     <div id="dna-tooltip" aria-hidden="true"></div>
 </section>
 
+<footer class="site-footer"><span>EDUCATION × WEALTH · INTERACTIVE RESEARCH</span><span>Designed & developed by Alexia Riner · 2026</span></footer>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="script.js"></script>
 </body>
