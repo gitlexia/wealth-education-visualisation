@@ -125,9 +125,9 @@ function buildScatter(data) {
 
     // decide colour of stars and dots based on consistency over time
     function getColour(d) {
-        if (d.yearsAbove >= 10 && d.residual_scaled > 0) return "#fab721";     // yellow (strong overperformer)
-        if (d.yearsBelow >= 10 && d.residual_scaled < 0) return "#5a2716";     // dark orange (strong underperformer)
-        return "#f4823f";                             // gold (mixed / occasional)
+        if (d.yearsAbove >= 10 && d.residual_scaled > 0) return "#7bd6b4";     // yellow (strong overperformer)
+        if (d.yearsBelow >= 10 && d.residual_scaled < 0) return "#d98b87";     // dark orange (strong underperformer)
+        return "#e4b56d";                             // gold (mixed / occasional)
     }
 
     // add or remove a country from the selection (up to 5 for max limit) and updates linked views
@@ -242,7 +242,8 @@ function buildScatter(data) {
     // get the svg from the html file
     const svg = d3.select("#chart")
         .attr("width", dims.width)
-        .attr("height", dims.height);
+        .attr("height", dims.height)
+        .attr("viewBox", `0 0 ${dims.width} ${dims.height}`);
 
     // get detail card from html file
     const detailCard = d3.select("#detail-card");
@@ -633,7 +634,8 @@ function buildScatter(data) {
         const svgDNA = wrap.append("svg")
             .attr("id", "dna-chart")
             .attr("width", dnaDims.width)
-            .attr("height", dnaDims.height);
+            .attr("height", dnaDims.height)
+            .attr("viewBox", `0 0 ${dnaDims.width} ${dnaDims.height}`);
 
         const panelDNA = svgDNA.append("g")
             .attr("transform", `translate(${dnaDims.margin.l}, ${dnaDims.margin.t})`);
@@ -969,7 +971,7 @@ function buildScatter(data) {
   </div>
 
   <div class="legend-item">
-    <div class="legend-symbol" style="background:#f4823f;"></div>
+    <div class="legend-symbol" style="background:#e4b56d;"></div>
     <div class="legend-text">
       <div class="legend-title">Occasional over/under-achiever</div>
       <div class="legend-sub"> 5-9 years above or below expected</div>
@@ -977,7 +979,7 @@ function buildScatter(data) {
   </div>
 
   <div class="legend-item">
-    <div class="legend-symbol" style="background:#5a2716;"></div>
+    <div class="legend-symbol" style="background:#d98b87;"></div>
     <div class="legend-text">
       <div class="legend-title">Below expected</div>
       <div class="legend-sub">≥10 years below expected</div>
