@@ -491,3 +491,72 @@ body.light-mode #dna-tooltip .tooltip {
 #countrySelect:focus {
     border-color: var(--text);
 }
+
+
+/* 2026 portfolio polish — visual system and responsive layout */
+:root {
+  --bg:#0b1019; --panel:#121b29; --text:#f2f5f8; --muted:#9baabc;
+  --border:#283447; --axis:#455369; --baseline:#a4b0bd;
+  --button-border:#37465a; --button-bg:#192536; --button-text:#c9d3df;
+  --button-hover:#26364a; --dot-opacity:1; --line-opacity:.65; --inactive-opacity:.16;
+}
+body.light-mode {
+  --bg:#f4f7f9; --panel:#ffffff; --text:#182536; --muted:#607083;
+  --border:#dae2ea; --axis:#9aa8b8; --baseline:#66778b;
+  --button-border:#cad5e0; --button-bg:#f6f8fb; --button-text:#3b4b5d;
+  --button-hover:#eaf0f6; --dot-opacity:1; --line-opacity:.65; --inactive-opacity:.2;
+}
+*{box-sizing:border-box}
+body {padding:0 32px 44px; font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; background:var(--bg)}
+.page,.dna-section,.site-footer{max-width:1120px;margin-left:auto;margin-right:auto}
+.dashboard-heading {padding:62px 0 24px;max-width:860px}
+.eyebrow,.chart-kicker,.filters-heading {font-size:11px;font-weight:750;letter-spacing:.14em;color:#7bcfb5}
+.eyebrow{display:flex;align-items:center;gap:10px}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7bd6b4;box-shadow:0 0 0 4px rgba(123,214,180,.10)}
+.edition{color:var(--muted);font-weight:500}
+h1{font-size:clamp(30px,4vw,46px);line-height:1.13;font-weight:720;letter-spacing:-.045em;max-width:780px;margin:18px 0 14px}
+.page-intro{max-width:720px;font-size:15px;line-height:1.8;color:var(--muted);margin:0}
+.filters-heading{display:flex;align-items:center;gap:16px;margin:14px 0 15px;color:var(--text)}
+.filters-heading span{letter-spacing:0;text-transform:none;font-size:12px;font-weight:400;color:var(--muted)}
+.filter-bar{margin-bottom:10px;gap:8px}
+.filter-label{min-width:76px;margin:0;font-size:12px;font-weight:650;color:var(--muted)}
+.filter-button,.deviation-button,.control-button{font-family:inherit;padding:8px 14px;font-size:12px;font-weight:550;border-radius:9px;border:1px solid var(--button-border);background:var(--button-bg);color:var(--button-text);transition:background .16s,border-color .16s,color .16s}
+.filter-button.active,.deviation-button.active{border-color:#69c7ab;background:rgba(105,199,171,.13);color:#9de6cf}
+body.light-mode .filter-button.active,body.light-mode .deviation-button.active{color:#157f66}
+button:focus-visible,select:focus-visible{outline:2px solid #81d5b9;outline-offset:3px}
+.top-bar{margin:10px 0 14px}
+.chart-container,.dna-section{border-radius:16px;padding:28px 30px;border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,.12);background:var(--panel)}
+.chart-kicker{margin-bottom:7px}
+.chart-title,.dna-title{margin:0 0 4px;font-size:20px;letter-spacing:-.025em;font-weight:680}
+.chart-hint,.dna-hint{margin:3px 0 16px;color:var(--muted);font-size:12px}
+.scatter-controls{margin:2px 0 0}
+#countrySelect{border-radius:9px;min-width:195px;padding:9px 12px;background:var(--button-bg)}
+#chart{width:100%;height:auto;max-width:100%;margin:0 auto}
+#dna-chart{width:100%;height:auto;max-width:100%}
+.legend{justify-content:flex-start;gap:22px 28px;padding:6px 4px 7px;margin:18px 0 12px;font-size:12px}
+.legend-item{align-items:flex-start;gap:8px}
+.legend-title{font-weight:600}.legend-sub{font-size:11px;margin-top:2px}
+.legend-star{color:#7bd6b4}.legend-symbol{margin-top:3px}
+.dna-section{margin-top:18px}
+.dna-header{align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.dna-title-stack{min-width:230px}.dna-hint{flex:1;max-width:460px;margin:0}
+.dna-selected{padding:13px 0 12px;margin:0 0 6px;border-top:1px solid var(--border);min-height:51px}
+.dna-chip{border-width:1px;padding:7px 12px;border-radius:8px}
+.dna-footer-note{padding-top:12px;border-top:1px solid var(--border)}
+.dna-legend{margin-top:12px}.dna-axis text{font-size:12px}
+.detail-card,#dna-tooltip .tooltip{border-radius:10px;box-shadow:0 16px 44px rgba(0,0,0,.28)}
+.site-footer{display:flex;justify-content:space-between;gap:20px;padding:30px 0 4px;font-size:11px;color:var(--muted);letter-spacing:.025em}
+.signature{display:none}
+@media(max-width:720px){
+ body{padding:0 14px 24px}.dashboard-heading{padding:36px 4px 25px}
+ h1{font-size:32px}.page-intro{font-size:14px}
+ .filter-label{min-width:100%;margin:4px 0 2px}
+ .filter-bar{gap:7px;margin-bottom:14px}
+ .filter-button,.deviation-button{padding:8px 10px;font-size:11px}
+ .chart-container,.dna-section{padding:16px;border-radius:12px}
+ .chart-title,.dna-title{font-size:17px}
+ .dna-header{align-items:flex-start;flex-direction:column}
+ .dna-hint{max-width:none}.legend{gap:12px 20px}
+ .site-footer{flex-direction:column;gap:5px}
+ .edition{display:none}
+}
